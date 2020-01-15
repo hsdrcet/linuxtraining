@@ -18,11 +18,12 @@ int main(int argc, char **argv)
 	printf("FILE: %s; pid of Client is => %d\n", __FILE__, pid);
 
 	// prepare client request
-	req.oprnd1 = 5;
+	req.oprnd1 = 10;
 	req.oprnd2 = 5;
-	req.oprtr = '+';
+	req.oprtr = argv[1][0];
 	req.pid = pid;
 
+	
 	// Open server fifo and Send write request to server
 	printf("FILE: %s; Opening SERVER FIFO for writting request.....\n", __FILE__);
 	wfd = open(SERVERFIFO, O_WRONLY);

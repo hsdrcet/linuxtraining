@@ -38,10 +38,29 @@ int main(int argc, char **argv)
         
 	// Debug here
 	printf("FILE: %s; Data recieved from Server\n", __FILE__);
-	printf("FILE: %s; Requesting client PID => %d; oprtr1 %d; oprtr2 %d; oprnd %c\n", __FILE__, req.pid, req.oprnd1, req.oprnd2, req.oprtr);
+	printf("FILE: %s; Requesting client PID => %d; oprtr1 %d; oprtr2 %d; oprtr %c\n", __FILE__, req.pid, req.oprnd1, req.oprnd2, req.oprtr);
 
 	// calulate
-	res.result = (float)(req.oprnd1 - req.oprnd2);
+	switch(req.oprtr)
+	{
+		case '+':
+			res.result = (float)(req.oprnd1 + req.oprnd2);
+			break;
+		case '-':
+			res.result = (float)(req.oprnd1 - req.oprnd2);
+			break;
+		case '*':
+			res.result = (float)(req.oprnd1 * req.oprnd2);
+			break;
+		case '/':
+			res.result = (float)(req.oprnd1 / req.oprnd2);
+			break;
+		default:
+			printf("FILE: %s; Error invalid operator\n", __FILE__);
+			break;
+			//exit(1);
+	}
+//	res.result = (float)(req.oprnd1 + req.oprnd2);
 	res.pid = req.pid;
 	printf("FILE: %s; Result calulated in vendor => %f\n", __FILE__, res.result);
 
